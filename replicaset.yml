@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: web-project-rs
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web-project
+  template:
+    metadata:
+      labels:
+        app: web-project
+    spec:
+      containers:
+      - name: web-project
+        image: kubedevio/web-page:blue
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+          - containerPort: 80
